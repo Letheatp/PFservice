@@ -68,3 +68,6 @@ MVP       9/1
 
 ##　画面遷移図
 https://www.figma.com/file/DbeqThUTgFPKnIKEPAWxfH/%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0%3A1&mode=design&t=D8aqirOP0s2Mp08X-1
+
+## ER図
+https://gyazo.com/c565b6b77b6fa6cc79b8c0ff8b894513
