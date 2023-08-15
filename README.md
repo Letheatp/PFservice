@@ -50,8 +50,7 @@ Amazonほしい物リストを利用することで課金の量を抑えるこ�
 
 ## 使用技術
 
-Ruby3系
- - gem mechanizeでスクレイピング
+Ruby3系(gem mechanizeでスクレイピング)
 Rails7系
 PostgreSQL
 JavaScript
@@ -68,3 +67,6 @@ MVP       9/1
 
 ##　画面遷移図
 https://www.figma.com/file/DbeqThUTgFPKnIKEPAWxfH/%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0%3A1&mode=design&t=D8aqirOP0s2Mp08X-1
+
+## ER図
+https://gyazo.com/7c55600450117112d373343d1b3627e1
