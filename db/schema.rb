@@ -28,13 +28,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
 
   create_table "purchase_records", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "gameable_id", null: false
-    t.string "game_type", default: "default"
+    t.string "gameable_type"
+    t.integer "gameable_id"
     t.integer "amount"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["gameable_id"], name: "index_purchase_records_on_gameable_id"
+    t.index ["gameable_type", "gameable_id"], name: "index_purchase_records_on_gameable"
     t.index ["user_id"], name: "index_purchase_records_on_user_id"
   end
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
 
   create_table "wishlist_items", force: :cascade do |t|
     t.integer "wishlist_id", null: false
-    t.integer "item_id", null: false
+    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_wishlist_items_on_item_id"
@@ -73,10 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
-  add_foreign_key "purchase_records", "gameables"
   add_foreign_key "purchase_records", "users"
   add_foreign_key "user_games", "users"
-  add_foreign_key "wishlist_items", "items"
+  add_foreign_key "wishlist_items", "amazon_items", column: "item_id"
   add_foreign_key "wishlist_items", "wishlists"
   add_foreign_key "wishlists", "users"
 end
