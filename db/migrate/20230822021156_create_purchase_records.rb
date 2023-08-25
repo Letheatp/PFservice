@@ -3,7 +3,7 @@ class CreatePurchaseRecords < ActiveRecord::Migration[7.0]
     create_table :purchase_records do |t|
       t.references :user, null: false, foreign_key: true
       t.references :gameable, polymorphic: true
-      t.integer :amount
+      t.integer :amount, null: false
       t.text :comment
 
       t.timestamps
