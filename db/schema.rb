@@ -12,9 +12,9 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
   create_table "amazon_items", force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.integer "price"
+    t.string "name", null: false
+    t.string "url", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
     t.integer "user_id", null: false
     t.string "gameable_type"
     t.integer "gameable_id"
-    t.integer "amount"
+    t.integer "amount", null: false
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,15 +58,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_043810) do
 
   create_table "wishlist_items", force: :cascade do |t|
     t.integer "wishlist_id", null: false
-    t.integer "item_id"
+    t.integer "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_wishlist_items_on_item_id"
+    t.index ["wishlist_id", "item_id"], name: "index_wishlist_items_on_wishlist_id_and_item_id", unique: true
     t.index ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
   end
 
   create_table "wishlists", force: :cascade do |t|
-    t.string "url"
+    t.string "url", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

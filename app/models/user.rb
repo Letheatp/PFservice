@@ -11,4 +11,18 @@ class User < ApplicationRecord
 
   validates :email, presence:true, uniqueness: true
   validates :name, presence: true, length: { maximum: 12 }
+
+  def create_user_game(title)
+    self.user_games.create!(
+      title: title
+    )
+  end
+
+  def record_purchase(game, price, comment = nil)
+    game.purchase_records.create!(
+      user_id: id,
+      price: price,
+      comment: comment
+    )
+  end
 end
