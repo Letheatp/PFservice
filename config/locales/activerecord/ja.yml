@@ -1,0 +1,30 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      purchase_record: 課金記録
+      wishlist: ほしい物リスト
+      amazon_item: 商品
+      game: ゲーム
+      user_game: ゲーム
+    attributes:
+      user:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+      purchase_record:
+        amount: 金額
+        connent: コメント
+      wishlist:
+        url: URL
+      amazon_item:
+        name: 商品名
+        price: 価格
+        url: URL
+      game:
+        title: タイトル
+        icon: アイコン
+      user_game:
+        title: タイトル
+        icon: アイコン
