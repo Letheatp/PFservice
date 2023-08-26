@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   root "records#index"
 
   resources :records, only: %i[index]
+  get "/signup", to: "users#new" 
   resources :users, only: %i[new create]
 end

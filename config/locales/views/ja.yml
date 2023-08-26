@@ -1,13 +1,15 @@
 ja:
   defaults:
     login: ログイン
-    register: 登録
     logout: ログアウト
   sessions:
     new:
       title: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
+  users:
+    new:
+      title: ユーザー登録
   records:
     index:
       title: 投稿一覧
@@ -16,5 +18,4 @@ ja:
     edit:
       title: 投稿編集
   signup:
-    new:
-      title: 新規登録
+    title: ユーザー登録
