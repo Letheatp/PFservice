@@ -78,3 +78,6 @@ group :production do
 end
 
 gem "sorcery"
+gem 'bootstrap', '~> 5.0.2'
+gem 'jquery-rails'
+gem "rails-i18n"
