@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "records#index"
 
   resources :records, only: %i[index]
+  resources :users, only: %i[new create]
 end
