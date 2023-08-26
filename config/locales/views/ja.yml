@@ -2,7 +2,7 @@ ja:
   defaults:
     login: ログイン
     logout: ログアウト
-  sessions:
+  user_sessions:
     new:
       title: ログイン
       to_register_page: 登録ページへ
