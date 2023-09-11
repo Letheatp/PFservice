@@ -3,6 +3,7 @@ ja:
     login: ログイン
     logout: ログアウト
     signup: 新規登録
+    send: 送信
   user_sessions:
     new:
       title: ログイン

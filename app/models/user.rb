@@ -18,11 +18,16 @@ class User < ApplicationRecord
     )
   end
 
-  def record_purchase(game, price, comment = nil)
+  def record_purchase(game, amount, comment = nil)
     game.purchase_records.create!(
       user_id: id,
-      price: price,
+      amount: amount,
       comment: comment
     )
+  end
+
+  def available_games
+    result = [].append(*Game.all, *self.user_games)
+    return result
   end
 end
