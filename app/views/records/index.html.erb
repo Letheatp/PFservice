@@ -1,1 +1,31 @@
-<p>TOP PAGE</p>
+<div class="container mt-5">
+  <h1>課金記録一覧</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ゲーム名</th>
+        <th>金額</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @records.each do |record| %>
+        <tr>
+          <td>
+            <div class="text-decoration-none"><%=record.game_title%></div>
+          </td>
+          <td>
+            <span class="badge bg-primary" data-bs-toggle="tooltip" title="金額">
+              <%= record.amount %>
+            </span>
+          </td>
+          <td>
+            <%= link_to record_path(record), data: { turbo_method: :delete, confirm: "削除しますか？" }, class: "text-decoration-none" do%>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

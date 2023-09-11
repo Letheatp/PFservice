@@ -1,16 +1,20 @@
 class RecordsController < ApplicationController
+  before_action :set_record, only: %i[show destroy]
+
   def index
-    
+    @records = current_user.purchase_records
+  end
+
+  def show
+
   end
 
   def new
-    @records = current_user.purchase_records
     @record_form = PurchaseRecordForm.new
   end
 
   def create
     @record_form = PurchaseRecordForm.new(form_params)
-
 
     if @record_form.valid?
       game_id = @record_form.game_id
@@ -27,6 +31,12 @@ class RecordsController < ApplicationController
     end
   end
 
+  def destroy
+    @record.destroy!
+    flash[:danger] = "削除しました"
+    redirect_to records_path
+  end
+
   private
 
   def form_params
@@ -37,5 +47,7 @@ class RecordsController < ApplicationController
     return conv_params
   end
 
-  
+  def set_record
+    @record = PurchaseRecord.find(params[:id])
+  end
 end
