@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3><%= @record.game_title %> - Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <h4>タイトル</h4>
+            <p class="lead"><%= @record.game_title %></p>
+          </div>
+          <div class="mb-4" id="amount-block">
+            <h4>金額</h4>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="display-4 text-success mb-0" id="amount-value">
+                <%= @record.amount %>
+              </p>
+              <button id="amount-edit">
+                <i class="fas fa-pen-to-square" style="font-size: 24px;"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-4">
+            <h4>コメント</h4>
+            <blockquote class="blockquote">
+              <p><%= @record.comment %></p>
+              <footer class="blockquote-footer">User Comment</footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

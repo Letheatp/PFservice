@@ -12,7 +12,7 @@
       <% @records.each do |record| %>
         <tr>
           <td>
-            <div class="text-decoration-none"><%=record.game_title%></div>
+            <%=link_to record.game_title, record_path(record), class:"text-decoration-none" %>
           </td>
           <td>
             <span class="badge bg-primary" data-bs-toggle="tooltip" title="金額">

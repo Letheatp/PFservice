@@ -31,6 +31,18 @@ class RecordsController < ApplicationController
     end
   end
 
+  def update
+    record_id = params[:record_id].to_i
+    record = current_user.purchase_records.find(record_id)
+    update_params = {amount: params[:amount], comment: params[:comment]}
+
+    if record.update(update_params)
+      render json: { status: :ok } 
+    else
+      render json: { error: record.errors, status: :unprocessable_entity } 
+    end
+  end
+
   def destroy
     @record.destroy!
     flash[:danger] = "削除しました"

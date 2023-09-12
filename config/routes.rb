@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get "signup", to: "users#new"
 
-  resources :records, only: %i[index new create destroy]
+  resources :records, only: %i[index show new create update destroy]
   resources :users, only: %i[new create]
 end
