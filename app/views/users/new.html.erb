@@ -2,6 +2,7 @@
   <h1 class="text-center"><%= t('.title') %></h1>
 
   <%= form_with(model: @user, local: true) do |form| %>
+    <%= render partial: "/shared/error_messages", locals: { model: @user }%>
 
     <div class="form-group">
       <%= form.label :name %>
