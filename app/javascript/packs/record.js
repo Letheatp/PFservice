@@ -1,11 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOMを読み込みました");
-  var amount_block = document.getElementById("amount-block");
-  var amount_edit = amount_block.querySelector("#amount-edit");
-  var amount_edit_finish;
-  var value = parseInt(amount_block.querySelector("#amount-value").innerText);
+document.addEventListener('turbo:load', function() {
+  console.log("turboをロードしました");
 
-  amount_edit.addEventListener('click', showAmountInputField);
+  if(document.querySelector("#amount-block")){
+    var amount_block = document.getElementById("amount-block");
+    var amount_edit = amount_block.querySelector("#amount-edit");
+    var amount_edit_finish;
+    var value = parseInt(amount_block.querySelector("#amount-value").innerText);
+    amount_edit.addEventListener('click', showAmountInputField);
+  }
 
   function showAmountInputField(){
     amount_block.innerHTML = `

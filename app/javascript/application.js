@@ -8,3 +8,7 @@ import "controllers"
 import "@fortawesome/fontawesome-free"
 
 import "./packs/record"
+
+document.addEventListener('DOMContentLoaded',function(){
+  console.log("DOMを読み込みました")
+})
