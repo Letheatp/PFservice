@@ -8,6 +8,7 @@ import "controllers"
 import "@fortawesome/fontawesome-free"
 
 import "record"
+import "game"
 
 document.addEventListener('DOMContentLoaded',function(){
   console.log("DOMを読み込みました")

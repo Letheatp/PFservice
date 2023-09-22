@@ -1,19 +1,31 @@
-<%=link_to records_path, style: "color: inherit; text-decoration: none;" do%>
-  <div class="container py-4">
+<div class="container py-4 mb-4">
+  <%=link_to records_path, style: "color: inherit; text-decoration: none;" do%>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">合計金額</h5>
         <h3 class="card-text"><%=sum_amount(current_user)%></h3>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <div class="container">
   <%= form_with(model: @record_form, url: records_path, method: :post) do |form| %>
     <div class="form-group">
-      <%= form.label :game_id %>
-      <%= form.number_field :game_id, class: "form-control" %>
+      <%= form.label :game %>
+      <div class="position-relative">
+        <input class="col-12 form-control" type="text" id="search-box" placeholder="タイトルで検索">
+        <span id="clear-search" class="position-absolute top-50 end-0 translate-middle-y pe-2" style="cursor:pointer;">&times;</span>
+      </div>
+      <div id="selectable-options" class="list-group mt-3"></div>
+
+      <select id="select" class="d-none">
+        <% current_user.available_games.each_with_index do |game, idx| %>
+          <option value=<%= idx %>><%= game.title %></option>
+        <% end %>
+      </select>
+
+      <%= form.number_field :game_id, class: "d-none"%>
     </div>
 
     <div class="form-group">
