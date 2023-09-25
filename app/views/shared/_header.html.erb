@@ -11,7 +11,7 @@
             <p class="nav-link mb-0"><%=current_user.name%></p>
           </li>
           <li class="nav-item">
-            <%= link_to t('defaults.settings'), settings_path, class: "nav-link mb-0" %>
+            <%= link_to t('defaults.settings'), settings_statistics_path, class: "nav-link mb-0" %>
           </li>
           <li class="nav-item">
             <%= link_to t('defaults.logout'), logout_path, data: { turbo_method: :delete }, class: "nav-link mb-0" %>

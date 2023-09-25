@@ -1,0 +1,11 @@
+<p>WISHLISTS</p>
+<div class="form-group p-3 container" id="wishlist-container">
+  <div class="cotainer" id="wishlist-list">
+  <%current_user.wishlists.each do |wishlist|%>
+    <%=render partial: "wishlist_element", locals: { wishlist: wishlist }%>
+  <%end%>
+  </div>
+  <div class="container d-flex align-items-center" id="new-wishlist">
+    <button class="ms-auto" id="append-wishlist-element"><%=t("defaults.append")%></button>
+  </div>
+</div>

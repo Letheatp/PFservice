@@ -7,8 +7,10 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@fortawesome/fontawesome-free"
 
-import "record"
-import "game"
+import "./packs/game"
+import "./packs/record"
+import func_wishlist from "./packs/wishlist"
+import "./packs/settings"
 
 document.addEventListener('DOMContentLoaded',function(){
   console.log("DOMを読み込みました")

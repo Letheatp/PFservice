@@ -13,3 +13,19 @@
  */
 
 @import "bootstrap";
+
+.og-button {
+  cursor: pointer; // カーソルをポインタに変更
+  
+  &:hover {
+    color: darken(#007bff, 10%);
+  }
+  
+  &:active {
+    color: lighten(#007bff, 10%);
+  }
+}
+
+.wishlist-form-linked {
+  cursor: pointer;
+}

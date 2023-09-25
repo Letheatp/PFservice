@@ -5,6 +5,7 @@ ja:
     signup: 新規登録
     settings: 設定
     send: 送信
+    append: 追加
   user_sessions:
     new:
       title: ログイン
