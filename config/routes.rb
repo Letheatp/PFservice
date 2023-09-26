@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   namespace :settings do
     resource :statistics, only: %i[show]
-    resources :wishlists, only: %i[index show create update]
+    resources :wishlists, only: %i[index show create update destroy]
     resource :notifications, only: %i[show]
     resource :terms, only: %i[show]
     resource :inquiry, controller: 'inquiry', only: %i[show create]

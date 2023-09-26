@@ -1,6 +1,9 @@
 class Settings::WishlistsController < SettingsController
   def show
-
+    @wishlist = current_user.wishlists.find(params[:id]);
+    if request.xhr?
+      render partial: 'show', layout: false
+    end
   end
 
   def index
@@ -31,6 +34,16 @@ class Settings::WishlistsController < SettingsController
         else
           render json: { error: wishlist.errors, status: :unprocessable_entity } 
         end
+      end
+    end
+  end
+
+  def destroy
+    respond_to do |format|
+      format.json do
+        wishlist = current_user.wishlists.find(params[:id])
+        wishlist.destroy!
+        render json: { status: :ok }
       end
     end
   end
