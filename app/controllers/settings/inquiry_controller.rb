@@ -1,8 +1,6 @@
 class Settings::InquiryController < SettingsController
-  def show
-    if request.xhr?
-      render partial: 'partial', layout: false
-    end
+  def new
+
   end
 
   def create

@@ -1,15 +1,17 @@
 class Settings::WishlistsController < SettingsController
   def show
-    @wishlist = current_user.wishlists.find(params[:id]);
+    wishlist = current_user.wishlists.find(params[:id])
+    items = wishlist.amazon_items
     if request.xhr?
-      render partial: 'show', layout: false
+      respond_to do |format|
+        format.json do
+          render json: items
+        end
+      end
     end
   end
 
   def index
-    if request.xhr?
-      render partial: 'wishlists', layout: false
-    end
   end
 
   def create

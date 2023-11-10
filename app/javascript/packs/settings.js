@@ -1,9 +1,7 @@
-import func_wishlist from "./wishlist";
-
 document.addEventListener('turbo:load', function() {
   var settings_tab = document.getElementById("v-pills-settings-tab");
   var settings_tab_element = document.getElementById("settings-tab-element");
-  if(settings_tab){
+  if(false){
     initializeTab();
     initializeObserver();
   }
@@ -66,8 +64,6 @@ document.addEventListener('turbo:load', function() {
   }
 
   function initializeObserver(){
-
-
     const config = {
       childList: true
     }

@@ -9,7 +9,7 @@ import "@fortawesome/fontawesome-free"
 
 import "./packs/game"
 import "./packs/record"
-import func_wishlist from "./packs/wishlist"
+import "./packs/wishlist"
 import "./packs/settings"
 
 document.addEventListener('DOMContentLoaded',function(){

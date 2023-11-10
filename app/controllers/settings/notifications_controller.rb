@@ -1,7 +1,7 @@
 class Settings::NotificationsController < SettingsController
-  def show
-    if request.xhr?
-      render partial: 'partial', layout: false
-    end
+  def edit
+  end
+
+  def update
   end
 end

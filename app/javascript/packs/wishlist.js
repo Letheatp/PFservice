@@ -1,27 +1,76 @@
-export default function func_wishlist() {
-  let wishlist_container = document.getElementById("wishlist-container");
-  if(wishlist_container){
-    var wishlist_elements = wishlist_container.querySelectorAll(".wishlist-element");
-    var append_button = wishlist_container.querySelector("#append-wishlist-element");
-    var new_wishlist = wishlist_container.querySelector("#new-wishlist");
-    var wishlist_modal = document.getElementById('wishlist-modal');
+document.addEventListener('turbo:load', function() {
+  let wishlistContainer = document.getElementById("wishlist-container");
+  if(wishlistContainer) {
+    var wishlistElements = wishlistContainer.querySelectorAll(".wishlist-element");
+    var appendButton = wishlistContainer.querySelector("#append-wishlist-element");
+    var newWishlist = wishlistContainer.querySelector("#new-wishlist");
 
-    append_button.onclick = showWishlistCreateField;
-
-    initializeModal();
+    appendButton.onclick = showWishlistCreateField;
     
-    for(let i = 0; i < wishlist_elements.length; i++){
-      let element = wishlist_elements[i];
+    for(let i = 0; i < wishlistElements.length; i++){
+      let element = wishlistElements[i];
       initializeWishlistElement(element);
     }
   }
 
-  function showWishlist(element){
-    let wishlistModal = new bootstrap.Modal(document.getElementById('wishlist-modal'), {
-      keyboard: false
-    })
+  function fetchWishlistItems(wishlist_id){
+    return new Promise((resolve, reject) => {
+      const url = `/settings/wishlists/${wishlist_id}`
 
-    wishlistModal.show();
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => resolve(data))
+      .catch(error => {
+        console.error(error);
+        reject(error);
+      });
+      })
+  }
+
+  function drawWishlistItems(items){
+    let wishlistModalElement = document.getElementById('wishlist-modal')
+    let body = wishlistModalElement.querySelector(".modal-body");
+    let itemsElement = document.createElement('div');
+    itemsElement.classList.add('container-fluid');
+    body.appendChild(itemsElement);
+
+    for(let i=0; i<items.length; i++){
+      const item = items[i];
+      let itemElement = document.createElement('div');
+      itemElement.classList.add('row');
+      itemsElement.appendChild(itemElement);
+
+      itemElement.innerHTML = `
+        <div class="col-md-3"><img src=${item['image_url']}></div>
+        <div class="col-md-8 ms-auto">
+          <a href=${item['url']} class="col-sm-9">${item['name']}</a>
+          <div class="col-sm-9">${item['price']}</div>
+        </div>`
+    }
+  }
+
+  function showWishlist(element){
+    const id = getIdFromListString(element.id);
+
+    fetchWishlistItems(id)
+      .then(items => {
+        drawWishlistItems(items);
+      })
+      .catch(error => {
+          console.error('Error fetching wishlist items:', error);
+      })
   }
 
   function createWishlist(element){
@@ -93,7 +142,7 @@ export default function func_wishlist() {
     const value = element.querySelector(".wishlist-element-input").value; 
 
     element.innerHTML = `\
-    <div class="form-control wishlist-element-input wishlist-element-linked">${value}</div>
+    <div class="form-control wishlist-element-input wishlist-element-linked" data-bs-toggle="modal" data-bs-target="#wishlist-modal">${value}</div>
     <div class="og-button wishlist-element-update"><i class="fa-solid fa-repeat me-1 ms-3"></i></div>
     <div class="og-button wishlist-element-edit"><i class="fa-solid fa-pen-to-square mx-1"></i></div>
     <div class="og-button wishlist-element-delete"><i class="fa-solid fa-trash mx-1"></i></div>`
@@ -130,20 +179,19 @@ export default function func_wishlist() {
   }
 
   function showWishlistCreateField(){
-
-    new_wishlist.innerHTML = `
+    newWishlist.innerHTML = `
         <input class="form-control wishlist-element-input">
         <div class="og-button" id="wishlist-create-check">
           <i class="fa-solid fa-check ms-3"></i>
         </div>`
 
-    append_button.remove();
-    let wishlist_create_check = new_wishlist.querySelector("#wishlist-create-check");
+    appendButton.remove();
+    let wishlist_create_check = newWishlist.querySelector("#wishlist-create-check");
     wishlist_create_check.onclick = completeWishlistCreateField;
   };
 
   function completeWishlistCreateField(){
-    const input_field = new_wishlist.querySelector(".wishlist-element-input")
+    const input_field = newWishlist.querySelector(".wishlist-element-input")
     const value = input_field.value;
 
     if(value != ""){
@@ -151,12 +199,12 @@ export default function func_wishlist() {
       created_wishlist_element.classList.add("d-flex", "align-items-center", "my-1", "wishlist-element");
   
       created_wishlist_element.innerHTML = `
-      <div class="form-control wishlist-element-input wishlist-element-linked">${value}</div>
+      <div class="form-control wishlist-element-input wishlist-element-linked" data-bs-toggle="modal" data-bs-target="#wishlist-modal">${value}</div>
         <div class="og-button wishlist-element-update"><i class="fa-solid fa-repeat me-1 ms-3"></i></div>
         <div class="og-button wishlist-element-edit"><i class="fa-solid fa-pen-to-square mx-1"></i></div>
         <div class="og-button wishlist-element-delete"><i class="fa-solid fa-trash mx-1"></i></div>`;
   
-      let wishlist_list = wishlist_container.querySelector("#wishlist-list");
+      let wishlist_list = wishlistContainer.querySelector("#wishlist-list");
       wishlist_list.appendChild(created_wishlist_element);
   
       createWishlist(created_wishlist_element);
@@ -166,11 +214,11 @@ export default function func_wishlist() {
   }
 
   function closeWishlistCreateField(){
-    new_wishlist.innerHTML = '\
+    newWishlist.innerHTML = '\
       <button class="ms-auto" id="append-wishlist-element">追加</button>';
 
-    append_button = new_wishlist.querySelector("#append-wishlist-element");
-    append_button.onclick = showWishlistCreateField;
+    appendButton = newWishlist.querySelector("#append-wishlist-element");
+    appendButton.onclick = showWishlistCreateField;
   }
 
   function initializeWishlistElement(element) {
@@ -185,30 +233,13 @@ export default function func_wishlist() {
         showWishlist(element);
       }
     }
-    update_button.onclick = function() { reloadWishlistURL(element) };
-    edit_button.onclick = function() { editWishlistURL(element) };
-    delete_button.onclick = function() { deleteWishlist(element) };
-  }
-
-  function initializeModal(){
-    wishlist_modal.innerHTML = `
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-        </div>
-        <div class="modal-body">
-          Modal body..
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-        </div>
-      </div>
-    </div>`
+    update_button.onclick = () => reloadWishlistURL(element);
+    edit_button.onclick = () => editWishlistURL(element);
+    delete_button.onclick = () => deleteWishlist(element);
   }
 
   function getIdFromListString(str){
     const match = str.match(/-(\d+)/);
     return match ? match[1] : null;
   }
-}
+})
