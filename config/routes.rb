@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :records, only: %i[index show new create update destroy]
   resources :users, only: %i[new create]
+  get "games", to: "games#index"
   namespace :settings do
     get "statistics", to: "statistics#index"
     resources :wishlists, only: %i[index show create update destroy]

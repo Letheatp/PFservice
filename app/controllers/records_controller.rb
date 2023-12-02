@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   before_action :set_record, only: %i[show destroy]
 
   def index
-    @records = current_user.purchase_records
+    @records = current_user.purchase_records.order(created_at: :desc)
   end
 
   def show

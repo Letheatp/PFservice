@@ -1,5 +1,4 @@
 document.addEventListener('turbo:load', function() {
-  console.log("turboをロードしました");
 
   if(document.querySelector("#amount-block")){
     var amount_block = document.getElementById("amount-block");
