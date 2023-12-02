@@ -1,5 +1,4 @@
 document.addEventListener('turbo:load', function() {
-  console.log("turboをロードしました");
 
   if(document.querySelector("#amount-block")){
     var amount_block = document.getElementById("amount-block");
@@ -14,9 +13,9 @@ document.addEventListener('turbo:load', function() {
     <h4>金額</h4>
     <div class="d-flex justify-content-between align-items-center">
       <input class="form-control" id="amount-field" type="number" value=${value}></input>
-      <button id="amount-edit-finish">
+      <div class="og-button ms-3" id="amount-edit-finish">
         <i class="fa-solid fa-check" style="font-size: 24px;"></i>
-      </button>
+      </div>
     </div>
     `;
     amount_edit_finish = amount_block.querySelector("#amount-edit-finish");
@@ -34,9 +33,9 @@ document.addEventListener('turbo:load', function() {
       <p class="display-4 text-success mb-0" id="amount-value">
         ${value}
       </p>
-      <button id="amount-edit">
+      <div class="og-button" id="amount-edit">
         <i class="fas fa-pen-to-square" style="font-size: 24px;"></i>
-      </button>
+      </div>
     </div>
     `
     amount_edit = amount_block.querySelector("#amount-edit");

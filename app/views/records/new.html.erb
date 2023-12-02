@@ -14,18 +14,11 @@
     <div class="form-group">
       <%= form.label :game %>
       <div class="position-relative">
-        <input class="col-12 form-control" type="text" id="search-box" placeholder="タイトルで検索">
-        <span id="clear-search" class="position-absolute top-50 end-0 translate-middle-y pe-2" style="cursor:pointer;">&times;</span>
+        <input class="col-12 form-control" type="text" id="purchase_record_form_game">
       </div>
-      <div id="selectable-options" class="list-group mt-3"></div>
-
-      <select id="select" class="d-none">
-        <% current_user.available_games.each_with_index do |game, idx| %>
-          <option value=<%= idx %>><%= game.title %></option>
-        <% end %>
-      </select>
-
-      <%= form.number_field :game_id, class: "d-none"%>
+      <div>
+        <%= form.number_field :game_id, class: "d-none", id: "game-id-field", value:"-1"%>
+      </div>
     </div>
 
     <div class="form-group">
@@ -41,5 +34,6 @@
     <%= form.submit t('defaults.send'), class: "btn btn-primary" %>
 
   <% end %>
-
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
